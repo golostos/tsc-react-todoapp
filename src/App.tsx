@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
-import TodoList, {Task} from './components/TodoList';
+import TodoList from './components/TodoList';
+import { Task } from './types';
 
 let initState = [{
   text: 'Task 1',
@@ -12,7 +13,7 @@ let initState = [{
 
 function App() {
   const [input, setInput] = useState<string>('')
-  const [tasks, setTasks] = useState<Task[]>([])
+  const [tasks, setTasks] = useState<Task[]>(initState)
 
   const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.target.value)
@@ -20,7 +21,6 @@ function App() {
 
   const submitHandler = (event: React.SyntheticEvent) => {
     event.preventDefault()
-    console.log('Submit')
     setTasks([...tasks, {text: input, completed: false}])
     setInput('')
   }

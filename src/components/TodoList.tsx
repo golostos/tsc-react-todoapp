@@ -1,20 +1,19 @@
-export type Task = {
-    text: string
-    completed: boolean
-}
+import { MapArrayToJSX, Task } from "../types";
 
 type TodoListProps = {
-    tasks: Array<Task>
+    tasks: Task[]
 }
 
 const TodoList = ({tasks}: TodoListProps): JSX.Element => {
+    const mapFunc: MapArrayToJSX<Task> = (task, index) => {
+        return <li key={index}
+        style={{textDecoration: task.completed ? 'line-through' : 'none'}}>
+            {task.text}
+        </li>
+    }
     return (
         <ul>
-            {tasks.map((task, index) => 
-                <li key={index} 
-                    style={{textDecoration: task.completed ? 'line-through' : 'none'}}>
-                        {task.text}
-                </li>)}
+            {tasks.map(mapFunc)}
         </ul>
     )
 }
